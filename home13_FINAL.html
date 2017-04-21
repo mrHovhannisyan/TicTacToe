@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Homework 13</title>
+		<style>
+			#main {
+				width: 306px;
+				height: 306px;
+				margin: 10px auto;
+			}
+			.vandak {
+				float: left;
+				border: 1px solid;
+				width: 100px;
+				height: 100px;
+				font-size: 80px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="vandak" onclick="xik(this)" data-flag="0"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="1"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="2"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="3"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="4"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="5"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="6"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="7"></div>
+			<div class="vandak" onclick="xik(this)" data-flag="8"></div>
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+	var qar = document.getElementsByClassName("vandak");
+	console.log(qar);
+	var stug = [];
+		for (i=0; i < qar.length; i++) {
+			stug.push(i);			
+		}
+	var l = stug.length;
+	console.log(stug);
+	function xik(set) {
+		if (set.innerText == "") {
+			set.innerText = "X";
+			index = set.getAttribute("data-flag");
+			console.log(index);
+		} else {
+			alert("!CHOOSE AN EMPTY FIELD");
+			return false;
+		}
+
+		if (index == "0" || index == "1" || index == "2" || index == "3" || index == "4" 
+			|| index == "5" || index == "6" || index == "7" || index == "8") {
+			console.log(stug);
+			console.log(stug.length);
+			var y = Math.floor(Math.random() * l);
+			console.log(y);	
+			var x = stug.indexOf(y);
+			console.log(x);
+
+			if (y == index || x == index || x == -1) {
+				y = Math.floor(Math.random() * l);
+				console.log(y);
+				x = stug.indexOf(y);
+				console.log(x);
+			}
+			if (y != index && x != index && x != -1 && qar[x].innerText == "") {
+				qar[x].innerText = "O";
+				console.log(qar[x]);
+			} else {
+				generate();
+			}
+		}
+	}		
+	
+	function generate() {
+		if (qar[index].innerText == "X" && qar[0].innerText != "" && qar[1].innerText != "" && qar[2].innerText != "" && 
+			qar[3].innerText != "" && qar[4].innerText != "" && qar[5].innerText != "" && qar[6].innerText != "" &&
+			qar[7].innerText != "" && qar[8].innerText != "") {
+			alert("GAME OVER");
+			return false;
+		}
+		y = Math.floor(Math.random() * l);
+		console.log(y);
+		x = stug.indexOf(y);
+		console.log(x);
+
+		if (y != index && x != index && x != -1 && qar[x].innerText == "") {
+			qar[x].innerText = "O";
+			console.log(qar[x]);
+		} else {
+			generate();
+		}
+	}
+</script>
